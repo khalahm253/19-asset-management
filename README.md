@@ -9,6 +9,7 @@
 * students will be able to upload static assets to AWS S3
 * students will be able to retrieve a cdn url that contains the previously uploaded static asset
 * students will be able to work with secret and public access keys
+* students will be able to assemble an application from modular parts
 
 ## Requirements
 
@@ -19,22 +20,14 @@
 * create a new model that represents a file type that you want to store on AWS S3
   * ex: `.mp3`, `.mp4`, `.png`, etc
 * create a test that uploads one of these files to your route
-* use the `aws-sdk` to assist with uploading
 * use `multer` to parse the file upload request
-
-#### Server Endpoint
-* `POST` - `/api/resource/:resourceID/new-resource`
-* `DELETE` - `/api/resource/:resourceID`
-  * use the `deleteObject` method provided by the `aws-sdk` to delete an object *(file)* from S3
-    * you will need to pass in a `params` object that contains the associated Bucket and AWS object key in order to delete the object from s3
-    * ex:
-    ``` javascript
-    var params = {
-      Bucket: 's3-bucket-name',
-      Key: 'object-filename'
-    }
-    s3.deleteObject(params)
-    ```
+* use the `aws-sdk` to assist with uploading
+* create user, profile, and image models, with relational connections
+* combine your API, Auth, and Upload modules into a single application
+* Following a sign-in (or OAuth creation), create a profile model entry, connected to the user id
+* Following the upload of an image, create a new record in the image collection, connected to the profile
+* Using populate, return a user's full profile AND a list of all images they've uploaded as a JSON object
+* Later, we can use this API to feed a pintrest like application. 
 
 #### Tests
 * `POST` - **200** - test that the upload worked and a resource object is returned
